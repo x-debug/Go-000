@@ -58,6 +58,6 @@ http http://localhost:1234/users\?uid\=4
 
 再看下服务端打印的堆栈信息
 
-![image-20201202104706098](/Users/nbboy/Library/Application Support/typora-user-images/image-20201202104706098.png)
+![](https://chenxf.org/usr/uploads/2020/12/2086147974.png)
 
 实际项目中可以把这些错误信息记录到log中，然后统一汇聚到ES中进行结构化和检索。
