@@ -1,6 +1,7 @@
 package api
 
 import (
+	"database/sql"
 	"fmt"
 	"github.com/pkg/errors"
 	"github.com/x-debug/Go-000/Week02/service"
@@ -18,10 +19,12 @@ func UserHandler(resp http.ResponseWriter, req *http.Request) {
 		}
 		user, err := service.GetUser(uint64(uid))
 		if err != nil {
-			resp.WriteHeader(http.StatusInternalServerError)
 			fmt.Printf("%+v", err)
 			err := errors.Cause(err)
-			_, _ = resp.Write([]byte(fmt.Sprintf("%s", err)))
+			if errors.Is(err, sql.ErrNoRows){//eat the error
+				resp.WriteHeader(http.StatusNotFound)
+			}
+			//_, _ = resp.Write([]byte(fmt.Sprintf("%s", err)))
 			return
 		}
 
