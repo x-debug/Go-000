@@ -163,6 +163,8 @@ V3.0架构在线上运行了一段时间，但是渐渐出现了一些问题，�
 
 参考材料:
 
-[microservices history](https://en.wikipedia.org/wiki/Microservices)
+[microservices history]: https://en.wikipedia.org/wiki/Microservices
+
 [unix programming art](https://www.amazon.com/UNIX-Programming-Art-Eric-S-Raymond/dp/B008Z1IEQ8)
+
 [microservices](https://martinfowler.com/articles/microservices.html)
