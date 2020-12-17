@@ -16,7 +16,7 @@ import (
 func main() {
 	//init db layer
 
-	_, cleanup := internal.InitializeDB()
+	_, cleanup, _ := internal.InitializeDB()
 	//init biz layer
 
 	router := gin.Default()

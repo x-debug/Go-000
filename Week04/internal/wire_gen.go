@@ -12,27 +12,27 @@ import (
 
 // Injectors from wire.go:
 
-func InitializeDB() (*data.DBConn, func()) {
+func InitializeDB() (*data.DBConn, func(), error) {
 	dbConf := data.NewConf()
 	dbConn, cleanup := data.NewDB(dbConf)
 	return dbConn, func() {
 		cleanup()
-	}
+	}, nil
 }
 
-func createUserCase() (*biz.UserCase, func()) {
+func createUserCase() (*biz.UserCase, func(), error) {
 	dbConf := data.NewConf()
 	dbConn, cleanup := data.NewDB(dbConf)
 	userDao := data.NewUserDao(dbConn)
 	userCase := biz.NewUserCase(userDao)
 	return userCase, func() {
 		cleanup()
-	}
+	}, nil
 }
 
 // wire.go:
 
 func GetUserCase() *biz.UserCase {
-	userCase, _ := createUserCase()
+	userCase, _, _ := createUserCase()
 	return userCase
 }
