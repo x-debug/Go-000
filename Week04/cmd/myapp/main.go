@@ -17,6 +17,8 @@ func main() {
 	//init db layer
 
 	_, cleanup, _ := internal.InitializeDB()
+	defer cleanup()
+
 	//init biz layer
 
 	router := gin.Default()
@@ -45,7 +47,6 @@ func main() {
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatal("Server forced to shutdown:", err)
 	}
-	cleanup()
 
 	log.Println("Server exiting")
 }
