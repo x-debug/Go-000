@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/gin-gonic/gin"
 	"github.com/x-debug/Go-000/Week04/api/myapp"
+	"github.com/x-debug/Go-000/Week04/internal"
 	"log"
 	"net/http"
 	"os"
@@ -15,6 +16,7 @@ import (
 func main() {
 	//init db layer
 
+	_, cleanup := internal.InitializeDB()
 	//init biz layer
 
 	router := gin.Default()
@@ -43,6 +45,7 @@ func main() {
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatal("Server forced to shutdown:", err)
 	}
+	cleanup()
 
 	log.Println("Server exiting")
 }

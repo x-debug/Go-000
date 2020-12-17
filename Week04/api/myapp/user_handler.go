@@ -8,7 +8,7 @@ import (
 )
 
 func GetUser(c *gin.Context)  {
-	userCase := internal.CreateUserCase()
+	userCase := internal.GetUserCase()
 	uid, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		c.String(http.StatusBadRequest, "Id is required")

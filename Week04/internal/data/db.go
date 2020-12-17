@@ -4,21 +4,35 @@ import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
+	"sync"
 )
 
-func NewDB() *sql.DB {
-	db, err := sql.Open("mysql",
-		"root:root@tcp(127.0.0.1:3306)/fake")
-	if err != nil {
-		log.Fatal(err)
+type DBConn struct {
+	*sql.DB
+	once sync.Once
+}
+
+var dbConn DBConn
+
+func NewDB(conf *DBConf) (*DBConn, func()) {
+	dbConn.once.Do(func() {
+		db, err := sql.Open(conf.driver, conf.uri)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		err = db.Ping()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		dbConn.DB = db
+	})
+
+	return &dbConn, func(){
+		err := dbConn.Close()
+		if err != nil {
+			log.Println("close dbConn error")
+		}
 	}
-
-	err = db.Ping()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	//defer db.Close()
-
-	return db
 }

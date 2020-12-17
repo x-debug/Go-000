@@ -1,7 +1,6 @@
 package data
 
 import (
-	"database/sql"
 	"github.com/pkg/errors"
 )
 
@@ -13,16 +12,16 @@ type User struct {
 }
 
 type UserDao struct {
-	db *sql.DB
+	conn *DBConn
 }
 
-func NewUserDao(db *sql.DB) *UserDao {
-	return &UserDao{db: db}
+func NewUserDao(conn *DBConn) *UserDao {
+	return &UserDao{conn: conn}
 }
 
 func (dao UserDao) QueryById(uid int) (*User, error) {
 	user := &User{}
-	err := dao.db.QueryRow("select id, username, password, nickname from `fake_user` where id=?", uid).Scan(&user.Id,
+	err := dao.conn.QueryRow("select id, username, password, nickname from `fake_user` where id=?", uid).Scan(&user.Id,
 		&user.Username, &user.Password, &user.Nickname)
 	if err != nil {
 		return nil, errors.WithStack(err)
