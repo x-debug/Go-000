@@ -6,6 +6,7 @@
 package internal
 
 import (
+	"github.com/google/wire"
 	"github.com/x-debug/Go-000/Week04/internal/biz"
 	"github.com/x-debug/Go-000/Week04/internal/data"
 )
@@ -31,6 +32,8 @@ func createUserCase() (*biz.UserCase, func(), error) {
 }
 
 // wire.go:
+
+var dbProviders = wire.NewSet(data.NewDB, data.NewConf)
 
 func GetUserCase() *biz.UserCase {
 	userCase, _, _ := createUserCase()

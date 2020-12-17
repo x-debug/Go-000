@@ -8,12 +8,14 @@ import (
 	"github.com/x-debug/Go-000/Week04/internal/data"
 )
 
+var dbProviders = wire.NewSet(data.NewDB, data.NewConf)
+
 func InitializeDB() (*data.DBConn, func(), error) {
 	panic(wire.Build(data.NewDB, data.NewConf))
 }
 
 func createUserCase() (*biz.UserCase, func(), error) {
-	panic(wire.Build(biz.NewUserCase, data.NewUserDao, data.NewDB, data.NewConf))
+	panic(wire.Build(biz.NewUserCase, wire.NewSet(dbProviders, data.NewUserDao)))
 }
 
 func GetUserCase() *biz.UserCase {
