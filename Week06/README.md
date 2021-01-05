@@ -61,3 +61,13 @@ public static class HealthCounts {
     }
 }
 ```
+
+参考资料:
+
+https://medium.com/@darek1024/hystrix-circuit-breaker-how-to-set-it-up-properly-84c75cfbe3ee
+
+https://www.dazhuanlan.com/2019/10/02/5d94ba10dddae/
+
+https://github.com/Netflix/Hystrix/wiki/How-it-Works#flow7
+
+https://github.com/afex/hystrix-go
