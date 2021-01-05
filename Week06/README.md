@@ -62,7 +62,7 @@ public static class HealthCounts {
 }
 ```
 
-参考资料:
+##### 参考资料:
 
 https://medium.com/@darek1024/hystrix-circuit-breaker-how-to-set-it-up-properly-84c75cfbe3ee
 
